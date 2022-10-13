@@ -1,0 +1,200 @@
+import('System')
+import('System.Text')
+import('System.Drawing')
+import('System.Windows')
+import('System.Windows.Forms')
+import('System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
+import('System.Text, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
+import('System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
+import('System.Windows, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
+import('System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
+
+-- 变量
+local _G = _G
+local load = load
+local pack, unpack, tinsert, tremove = table.pack, table.unpack, table.insert, table.remove
+local tostring = tostring
+local traceback = debug.traceback
+local xpcall = xpcall
+
+local history = {}
+local historyIndex = nil
+local historyLimit = 100
+
+-- 核心表
+local _M = { }
+
+-- 功能函数
+local output = function(str)
+    _M.TextBox1:AppendText(str)
+    _M.TextBox1:AppendText(Environment.NewLine)
+    _M.TextBox1:ScrollToCaret()
+end
+
+-- 改写全局打印函数
+_G.print = function(...)
+    local toprint = pack(...)
+    for i = 1, toprint.n do
+        output(tostring(toprint[i]))
+    end
+end
+
+local doREPL = function()
+    
+    local code = _M.TextBox2.Text
+
+    if code == '' then
+        return
+    end
+
+    local fn, err = load("return " .. code, 'stdin')
+
+    if not fn then
+        fn, err = load(code, 'stdin')
+    end
+
+    if fn then
+        local results = pack(xpcall(fn,traceback))
+        if results[1] then
+            if results.n > 1 then
+                _G.print(unpack(results, 2, results.n))
+            end
+        else
+            _G.print(results[2])
+        end
+
+        -- 仅当执行成功，才将代码记录
+        if history[#history] ~= code then
+            tinsert(history,code)
+            historyIndex = #history + 1
+            if #history > historyLimit then
+                tremove(history, 1)
+            end
+        end
+        -- 并清除文本框里的代码
+        _M.TextBox2.Text = ''
+    else
+        _G.print(err)
+    end
+end
+
+function _M:InitializeData()
+    self.CustomForm.ActiveControl = self.TextBox2
+end
+
+-- 处理事件
+function _M:Demo_Event(sender, e)
+    MessageBox.Show('Demo Event Handler')
+end
+
+-- 处理输入框的按键弹起事件
+function _M:TextBox2_KeyDown(sender, e)
+    if e.Modifiers ~= Keys.Control then
+        return false
+    end
+
+    -- Ctrl + Enter 执行代码
+    if e.KeyCode == Keys.Return then
+        -- 尝试执行代码
+        doREPL()
+        -- 阻止按键传递到编辑框
+        e.SuppressKeyPress = true
+        return true
+    end
+
+    -- Ctrl + Arrow Up 获取上一各代码
+    if e.KeyCode == Keys.Up then
+
+        if historyIndex then
+            historyIndex = historyIndex - 1
+            if historyIndex ~= 0 then
+                self.TextBox2.Text = history[historyIndex]
+            end
+        end
+        
+        e.SuppressKeyPress = true
+        return true
+    end
+
+    -- Ctrl + Arrow Down 获取下一个代码
+    if e.KeyCode == Keys.Down then
+
+        if historyIndex then
+
+            historyIndex = historyIndex + 1
+
+            if historyIndex > #history then
+                historyIndex = #history
+            end
+
+            self.TextBox2.Text = history[historyIndex]
+        end
+        
+        e.SuppressKeyPress = true
+        return true
+    end
+
+end
+
+-- 从这一行下面开始不要添加业务代码
+function _M:InitializeComponent()
+
+    self.TextBox1 = TextBox()
+    self.TextBox1.Multiline = true
+    self.TextBox1.ScrollBars = ScrollBars.Vertical
+    self.TextBox1.BackColor = SystemColors.Window
+    self.TextBox1.ForeColor = SystemColors.WindowText
+    self.TextBox1.Anchor = luanet.enum(AnchorStyles, 'Top, Bottom, Left, Right')
+    self.TextBox1.Cursor = Cursors.IBeam
+    self.TextBox1.Location = Point(10, 10)
+    self.TextBox1.Name = "TextBox1"
+    self.TextBox1.RightToLeft = RightToLeft.No
+    self.TextBox1.Size = Size(604, 300)
+    self.TextBox1.TabIndex = 0
+
+    self.Label1 = Label()
+    self.Label1.AutoSize = true
+    self.Label1.Text = "按 Ctrl + Enter 执行代码"
+    self.Label1.Anchor = luanet.enum(AnchorStyles, 'Bottom, Left, Right')
+    self.Label1.Location = Point(10, 530)
+    self.Label1.Name = "Label1"
+    self.Label1.Size = Size(149, 12)
+    self.Label1.TabIndex = 2
+
+    self.TextBox2 = TextBox()
+    self.TextBox2.Multiline = true
+    self.TextBox2.ScrollBars = ScrollBars.Vertical
+    self.TextBox2.Anchor = luanet.enum(AnchorStyles, 'Bottom, Left, Right')
+    self.TextBox2.Location = Point(10, 324)
+    self.TextBox2.Name = "TextBox2"
+    self.TextBox2.Size = Size(604, 200)
+    self.TextBox2.TabIndex = 1
+    self.TextBox2.KeyDown:Add(function(sender, e) self:TextBox2_KeyDown(sender, e) end)
+
+    self.CustomForm = Form()
+    self.CustomForm.AutoValidate = AutoValidate.EnablePreventFocusChange
+    self.CustomForm.BackColor = SystemColors.Control
+    self.CustomForm.ClientSize = Size(623, 554)
+    self.CustomForm.Text = "NLua Runner"
+    self.CustomForm.AutoScaleDimensions = SizeF(6, 12)
+    self.CustomForm.Cursor = Cursors.Default
+    self.CustomForm.ForeColor = SystemColors.ControlText
+    self.CustomForm.Name = "CustomForm"
+    self.CustomForm.RightToLeft = RightToLeft.No
+    self.CustomForm.Controls:Add(self.TextBox1)
+    self.CustomForm.Controls:Add(self.Label1)
+    self.CustomForm.Controls:Add(self.TextBox2)
+
+    --[[<Object name="CustomForm" type="NLuaWFD2.CustomForm, NLuaWFD2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" version="1"><AutoValidate>EnablePreventFocusChange</AutoValidate><BackColor>Control</BackColor><ClientSize>623, 554</ClientSize><Text>NLua Runner</Text><AutoScaleDimensions>6, 12</AutoScaleDimensions><Cursor>Default</Cursor><Font>宋体, 9pt</Font><ForeColor>ControlText</ForeColor><Name>CustomForm</Name><RightToLeft>No</RightToLeft><Object type="System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="TextBox1"><Multiline>True</Multiline><ScrollBars>Vertical</ScrollBars><BackColor>Window</BackColor><ForeColor>WindowText</ForeColor><Anchor>Top, Bottom, Left, Right</Anchor><Cursor>IBeam</Cursor><Font>宋体, 9pt</Font><Location>10, 10</Location><Name>TextBox1</Name><RightToLeft>No</RightToLeft><Size>604, 300</Size><TabIndex>0</TabIndex></Object><Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="Label1"><AutoSize>True</AutoSize><Text>按 Ctrl + Enter 执行代码</Text><Anchor>Bottom, Left, Right</Anchor><Location>10, 530</Location><Name>Label1</Name><Size>149, 12</Size><TabIndex>2</TabIndex></Object><Object type="System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="TextBox2"><Multiline>True</Multiline><ScrollBars>Vertical</ScrollBars><Anchor>Bottom, Left, Right</Anchor><Location>10, 324</Location><Name>TextBox2</Name><Size>604, 200</Size><TabIndex>1</TabIndex><Event event_name="KeyDown">TextBox2_KeyDown</Event></Object></Object>--]]
+
+end -- InitializeComponentEnd
+
+function _M:initialize()
+    -- 开启风格
+    Application.EnableVisualStyles()
+    self:InitializeComponent()
+    self:InitializeData()
+    Application.Run(self.CustomForm)
+end
+
+_M:initialize()

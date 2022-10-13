@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Smart.FormDesigner</id>
+    <version>1.4.3</version>
+    <authors>SmallAnts</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/SmallAnts/FormDesigner</projectUrl>
+    <description>FormDesigner 是一个基于.NET C# 开发的 Winform 自定义表单设计组件。支持Xml保存和加载表单，支持控件的拖放和属性设置，支持复制、粘贴、对齐、撤销、重做等设计时操作。</description>
+    <copyright>Copyright © SmallAnts 2018</copyright>
+    <tags>smart form designer custom form designer winform 自定义表单设计器</tags>
+    <repository url="https://github.com/SmallAnts/FormDesigner" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.8" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Design" targetFramework=".NETFramework4.8" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="D:\DoNotOpen\projects\easylua\nuget\net48\Smart.FormDesigner.dll" target="lib\net48\Smart.FormDesigner.dll" />
+  </files>
+</package>

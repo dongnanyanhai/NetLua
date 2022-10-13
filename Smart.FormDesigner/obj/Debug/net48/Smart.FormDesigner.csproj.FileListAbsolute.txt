@@ -1,0 +1,14 @@
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\bin\Debug\net48\Smart.FormDesigner.dll
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\bin\Debug\net48\Smart.FormDesigner.pdb
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.csproj.AssemblyReference.cache
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.Controls.DesignerControl.resources
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.Controls.PropertyboxControl.resources
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.Controls.ToolboxControl.resources
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.Properties.Resources.resources
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.csproj.GenerateResource.cache
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.GeneratedMSBuildEditorConfig.editorconfig
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.AssemblyInfoInputs.cache
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.AssemblyInfo.cs
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.csproj.CoreCompileInputs.cache
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.dll
+D:\DoNotOpen\projects\easylua\NetLua\Smart.FormDesigner\obj\Debug\net48\Smart.FormDesigner.pdb

@@ -1,0 +1,14 @@
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\bin\Debug\net40\Smart.FormDesigner.dll
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\bin\Debug\net40\Smart.FormDesigner.pdb
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.csproj.AssemblyReference.cache
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.Controls.DesignerControl.resources
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.Controls.PropertyboxControl.resources
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.Controls.ToolboxControl.resources
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.Properties.Resources.resources
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.csproj.GenerateResource.cache
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.GeneratedMSBuildEditorConfig.editorconfig
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.AssemblyInfoInputs.cache
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.AssemblyInfo.cs
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.csproj.CoreCompileInputs.cache
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.dll
+D:\DoNotOpen\projects\FormDesigner\src\Smart.FormDesigner\obj\Debug\net40\Smart.FormDesigner.pdb

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="Controls\ToolboxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\Toolbox\ToolboxListControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Designer\Designer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Designer\Internal\DesignSurface.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Designer\Serialization\DefaultDesignerLoader.cs">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
